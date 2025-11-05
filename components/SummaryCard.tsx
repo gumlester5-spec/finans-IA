@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface SummaryCardProps {
@@ -8,9 +7,9 @@ interface SummaryCardProps {
 }
 
 const SummaryCard: React.FC<SummaryCardProps> = ({ title, amount, color }) => {
-  const formattedAmount = new Intl.NumberFormat('es-ES', {
+  const formattedAmount = new Intl.NumberFormat('es-GT', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'GTQ',
   }).format(amount);
 
   return (

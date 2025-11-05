@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Transaction } from '../types';
 import { ICONS } from '../constants';
@@ -13,7 +12,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
   const { id, type, category, description, amount, date } = transaction;
   const isIncome = type === 'income';
   const amountColor = isIncome ? 'text-green-400' : 'text-red-400';
-  const formattedAmount = `${isIncome ? '+' : '-'} ${new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(amount)}`;
+  const formattedAmount = `${isIncome ? '+' : '-'} ${new Intl.NumberFormat('es-GT', { style: 'currency', currency: 'GTQ' }).format(amount)}`;
   const formattedDate = new Date(date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return (
