@@ -1,5 +1,3 @@
-
-import { GoogleGenAI } from "@google/genai";
 import { CATEGORIES } from '../constants';
 
 export const suggestCategory = async (description: string): Promise<string> => {
@@ -8,25 +6,36 @@ export const suggestCategory = async (description: string): Promise<string> => {
   }
   
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const categories = CATEGORIES.expense;
-    const prompt = `Basado en la descripción de la transacción "${description}", ¿cuál de las siguientes categorías de gastos se ajusta mejor? Categorías: ${categories.join(', ')}. Responde únicamente con el nombre de la categoría de la lista. No añadas explicaciones ni texto adicional.`;
-
-    const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
+    // Llama a nuestra propia función serverless en lugar de directamente a la API de Gemini
+    const response = await fetch('/.netlify/functions/suggest-category', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ description, categories }),
     });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'El servicio de sugerencias de IA falló.');
+    }
+
+    const data = await response.json();
+    const suggestedCategory = data.category;
     
-    const suggestedCategory = response.text.trim();
-    
+    // El cliente sigue validando si la categoría es válida
     if (categories.includes(suggestedCategory)) {
       return suggestedCategory;
     }
     
     console.warn("Gemini returned a category not in the list:", suggestedCategory);
-    return 'Otro'; // Fallback to 'Other'
+    return 'Otro'; // Fallback a 'Otro'
   } catch (error) {
-    console.error("Error suggesting category with Gemini:", error);
+    console.error("Error fetching category suggestion:", error);
+    if (error instanceof Error) {
+        throw new Error(error.message);
+    }
     throw new Error("No se pudo obtener la sugerencia de categoría de la IA.");
   }
 };
