@@ -1,0 +1,5 @@
+{
+  "name": "Gestor de Finanzas con IA",
+  "description": "Una aplicación web moderna para administrar tus finanzas personales. Realiza un seguimiento de ingresos y gastos, visualiza tus hábitos de gasto y obtén sugerencias de categorización inteligentes con la tecnología de Gemini.",
+  "requestFramePermissions": []
+}
