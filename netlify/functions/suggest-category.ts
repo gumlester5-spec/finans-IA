@@ -21,8 +21,7 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
+    if (!process.env.API_KEY) {
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'La clave de API no está configurada en el servidor.' }),
@@ -30,7 +29,7 @@ export const handler: Handler = async (event) => {
         };
     }
 
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const prompt = `Basado en la descripción de la transacción "${description}", ¿cuál de las siguientes categorías de gastos se ajusta mejor? Categorías: ${categories.join(', ')}. Responde únicamente con el nombre de la categoría de la lista. No añadas explicaciones ni texto adicional.`;
 
