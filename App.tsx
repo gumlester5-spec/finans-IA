@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { Transaction, TransactionType } from './types';
 import Header from './components/Header';
@@ -6,6 +5,7 @@ import SummaryCard from './components/SummaryCard';
 import CategoryChart from './components/CategoryChart';
 import TransactionList from './components/TransactionList';
 import AddTransactionModal from './components/AddTransactionModal';
+import Chatbot from './components/Chatbot';
 import { ICONS } from './constants';
 
 const App: React.FC = () => {
@@ -93,6 +93,8 @@ const App: React.FC = () => {
         />
       )}
       
+      <Chatbot transactions={transactions} />
+
       <button 
         onClick={() => handleOpenModal()}
         className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg transition-transform duration-300 transform hover:scale-110 lg:hidden"
