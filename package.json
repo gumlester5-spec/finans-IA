@@ -4,5 +4,9 @@
   "description": "Una aplicación web moderna para administrar tus finanzas personales.",
   "dependencies": {
     "@google/genai": "^1.28.0"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^2.6.0",
+    "typescript": "^5.3.3"
   }
 }
