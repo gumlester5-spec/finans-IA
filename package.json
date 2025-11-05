@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Una aplicación web moderna para administrar tus finanzas personales.",
   "scripts": {
-    "build": "esbuild index.tsx --bundle --outfile=dist/index.js --format=esm --jsx=automatic && sed 's|/index.tsx|/index.js|' index.html > dist/index.html && cp metadata.json dist/"
+    "build": "esbuild index.tsx --bundle --outfile=dist/index.js --format=esm --jsx=automatic --external:react --external:react-dom --external:react-dom/client --external:recharts && sed 's|/index.tsx|/index.js|' index.html > dist/index.html && cp metadata.json dist/"
   },
   "dependencies": {
     "@google/genai": "^1.28.0"
