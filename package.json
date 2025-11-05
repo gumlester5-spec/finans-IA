@@ -2,11 +2,15 @@
   "name": "gestor-finanzas-ia",
   "version": "1.0.0",
   "description": "Una aplicación web moderna para administrar tus finanzas personales.",
+  "scripts": {
+    "build": "esbuild index.tsx --bundle --outfile=dist/index.js --format=esm --jsx=automatic && sed 's|/index.tsx|/index.js|' index.html > dist/index.html && cp metadata.json dist/"
+  },
   "dependencies": {
     "@google/genai": "^1.28.0"
   },
   "devDependencies": {
     "@netlify/functions": "^2.6.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "esbuild": "^0.20.2"
   }
 }
